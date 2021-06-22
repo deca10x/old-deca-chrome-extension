@@ -14,5 +14,14 @@
   "bugs": {
     "url": "https://github.com/patternengine/deca-chrome-extension/issues"
   },
-  "homepage": "https://github.com/patternengine/deca-chrome-extension#readme"
+  "homepage": "https://github.com/patternengine/deca-chrome-extension#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "typescript": "^4.3.4"
+  }
 }
