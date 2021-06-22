@@ -13,6 +13,7 @@
     "service_worker": "background.js"
   },
   "action": {
+    "default_title": "Deca",
     "default_popup": "popup.html",
     "default_icons": {
       "16": "/images/icon-16.png",
@@ -21,9 +22,10 @@
       "128": "/images/icon-128.png"
     }
   },
-  "options_page": "/options.html",
+  "options_page": "options.html",
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
   ]
 }
