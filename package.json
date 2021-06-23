@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "webpack server --config webpack.dev.config.ts",
-    "build": "webpack --config webpack.prod.config.ts"
+    "build": "webpack --config webpack.prod.config.ts",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
