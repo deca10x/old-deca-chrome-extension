@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const config: webpack.Configuration = {
@@ -48,6 +49,9 @@ const config: webpack.Configuration = {
       template: 'src/options.html',
       filename: 'options.html',
       chunks: ['options'],
+    }),
+    new CopyPlugin({
+      patterns: ['manifest.json', { from: 'images', to: 'images' }],
     }),
     new ForkTsCheckerWebpackPlugin({
       async: false,
