@@ -1,14 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import './button.scss';
+import styles from './button.module.scss';
 
-const App = () => <p>Choose a different background color!</p>;
+const App = () => (
+  <div>
+    <p>Choose a different background color!</p>
+    <button className={styles.button}>test</button>
+  </div>
+);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root')
 );
 
@@ -42,11 +47,12 @@ function constructOptions(buttonColors: string[]) {
       // …create a button with that color…
       const button = document.createElement('button');
       button.dataset.color = buttonColor;
+      button.className = styles.button;
       button.style.backgroundColor = buttonColor;
 
       // …mark the currently selected color…
       if (buttonColor === currentColor) {
-        button.classList.add(selectedClassName);
+        button.classList.add(styles.selected);
       }
 
       // …and register a listener for when that button is clicked
