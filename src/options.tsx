@@ -6,7 +6,6 @@ import styles from './button.module.scss';
 const App = () => (
   <div>
     <p>Choose a different background color!</p>
-    <button className={styles.button}>test</button>
   </div>
 );
 
@@ -18,7 +17,6 @@ ReactDOM.render(
 );
 
 const page = document.getElementById('buttonDiv');
-const selectedClassName = 'current';
 const presetButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];
 
 // Reacts to a button click by marking the selected button and saving
@@ -26,15 +24,15 @@ const presetButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];
 function handleButtonClick(event: MouseEvent) {
   // Remove styling from the previously selected color
   const current = (event.target as any).parentElement.querySelector(
-    `.${selectedClassName}`
+    `.${styles.current}`
   );
   if (current && current !== event.target) {
-    current.classList.remove(selectedClassName);
+    current.classList.remove(styles.current);
   }
 
   // Mark the button as selected
   const color = (event.target as any).dataset.color;
-  (event.target as any).classList.add(selectedClassName);
+  (event.target as any).classList.add(styles.current);
   chrome.storage.sync.set({ color });
 }
 
@@ -47,12 +45,12 @@ function constructOptions(buttonColors: string[]) {
       // …create a button with that color…
       const button = document.createElement('button');
       button.dataset.color = buttonColor;
-      button.className = styles.button;
+      button.classList.add(styles.button);
       button.style.backgroundColor = buttonColor;
 
       // …mark the currently selected color…
       if (buttonColor === currentColor) {
-        button.classList.add(styles.selected);
+        button.classList.add(styles.current);
       }
 
       // …and register a listener for when that button is clicked

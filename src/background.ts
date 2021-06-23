@@ -1,8 +1,6 @@
-const color = '#3aa757';
+import { color } from './defaultColor';
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({ color });
   console.log('Default background color set to %cgreen', `color: ${color}`);
 });
-
-export {};
