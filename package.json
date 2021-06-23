@@ -17,6 +17,9 @@
     "url": "https://github.com/patternengine/deca-chrome-extension/issues"
   },
   "homepage": "https://github.com/patternengine/deca-chrome-extension#readme",
+  "browserslist": [
+    "last 4 Chrome versions"
+  ],
   "dependencies": {
     "@babel/runtime": "^7.14.6",
     "clsx": "^1.1.1",
