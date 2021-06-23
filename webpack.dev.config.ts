@@ -17,8 +17,9 @@ const config = merge<Configuration>(commonConfig, {
     contentBase: path.join(__dirname, 'build'),
     historyApiFallback: true,
     port: 4000,
-    open: true,
     hot: true,
+    open: true,
+    openPage: ['popup.html', 'options.html'],
   },
 });
 

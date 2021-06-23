@@ -2,7 +2,6 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import ESLintPlugin from 'eslint-webpack-plugin';
 
 export const commonConfig: webpack.Configuration = {
   entry: {
@@ -32,7 +31,7 @@ export const commonConfig: webpack.Configuration = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', 'jsx', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -47,9 +46,9 @@ export const commonConfig: webpack.Configuration = {
     }),
     new ForkTsCheckerWebpackPlugin({
       async: false,
-    }),
-    new ESLintPlugin({
-      extensions: ['js', 'jsx', 'ts', 'tsx'],
+      eslint: {
+        files: './src/**/*.{ts,tsx,js,jsx}',
+      },
     }),
   ],
 };
