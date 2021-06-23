@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const App = () => <h1>My React and TypeScript App!</h1>;
+const App = () => (
+  <h1>My React and TypeScript App! {new Date().toLocaleDateString()}</h1>
+);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,7 +24,10 @@ chrome.storage.sync.get('color', ({ color }) => {
 // When the button is clicked, inject setPageBackgroundColor into current page
 if (changeColor) {
   changeColor.addEventListener('click', async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
 
     if (tab.id) {
       chrome.scripting.executeScript({

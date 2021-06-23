@@ -4,7 +4,8 @@
   "description": "Deca Chrome extension",
   "private": true,
   "scripts": {
-    "start": "webpack server --config webpack.dev.config.ts"
+    "start": "webpack server --config webpack.dev.config.ts",
+    "build": "webpack --config webpack.prod.config.ts"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "@babel/preset-typescript": "^7.14.5",
     "@babel/runtime": "^7.14.6",
     "@types/chrome": "^0.0.145",
+    "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
     "@types/node": "^15.12.4",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
@@ -35,9 +37,12 @@
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-webpack-plugin": "^2.5.4",
+    "fork-ts-checker-webpack-plugin": "^6.2.12",
     "html-webpack-plugin": "^5.3.2",
     "prettier": "^2.3.1",
     "ts-node": "^10.0.0",
