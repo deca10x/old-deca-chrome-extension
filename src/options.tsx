@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './button.scss';
 
 const App = () => <p>Choose a different background color!</p>;
 

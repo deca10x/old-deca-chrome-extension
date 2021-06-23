@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/patternengine/deca-chrome-extension#readme",
   "dependencies": {
+    "clsx": "^1.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -41,6 +42,7 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^9.0.0",
+    "css-loader": "^5.2.6",
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
@@ -48,6 +50,9 @@
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "html-webpack-plugin": "^5.3.2",
     "prettier": "^2.3.1",
+    "sass": "^1.35.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4",
     "webpack": "^5.40.0",

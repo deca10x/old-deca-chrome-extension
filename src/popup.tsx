@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import styles from './button.scss';
+
 const App = () => (
-  <h1>My React and TypeScript App! {new Date().toLocaleDateString()}</h1>
+  <div>
+    <h1>My React and TypeScript App! {new Date().toLocaleDateString()}</h1>
+    <button type="button" className={styles.button}></button>
+  </div>
 );
 
 ReactDOM.render(

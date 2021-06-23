@@ -18,7 +18,7 @@ export const commonConfig: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/i,
+        test: /\.[jt]sx?$/i,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -30,6 +30,10 @@ export const commonConfig: webpack.Configuration = {
             ],
           },
         },
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },

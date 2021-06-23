@@ -6,7 +6,7 @@ import { merge } from 'webpack-merge';
 import { commonConfig } from './webpack.config';
 
 const config = merge<webpack.Configuration>(commonConfig, {
-  mode: 'production',
+  mode: 'development',
   plugins: [
     new CopyPlugin({
       patterns: ['manifest.json', { from: 'images', to: 'images' }],
