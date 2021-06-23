@@ -23,6 +23,11 @@
     }
   },
   "options_page": "options.html",
+  "externally_connectable": {
+    "matches": [
+      "https://deca.xyz/*"
+    ]
+  },
   "permissions": [
     "activeTab",
     "scripting",
