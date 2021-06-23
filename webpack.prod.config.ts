@@ -7,10 +7,14 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const config: webpack.Configuration = {
   mode: 'production',
-  entry: './src/popup.tsx',
+  entry: {
+    popup: './src/popup.tsx',
+    background: './src/background.ts',
+    options: './src/options.tsx',
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     publicPath: '',
   },
   module: {
@@ -37,6 +41,13 @@ const config: webpack.Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/popup.html',
+      filename: 'popup.html',
+      chunks: ['popup'],
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/options.html',
+      filename: 'options.html',
+      chunks: ['options'],
     }),
     new ForkTsCheckerWebpackPlugin({
       async: false,
