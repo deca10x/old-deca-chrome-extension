@@ -4,7 +4,7 @@
   "description": "Deca Chrome extension",
   "private": true,
   "scripts": {
-    "start": "webpack server --config webpack.dev.config.ts",
+    "dev": "webpack server --config webpack.dev.config.ts",
     "build": "webpack --config webpack.prod.config.ts",
     "lint": "eslint src"
   },
@@ -17,11 +17,14 @@
     "url": "https://github.com/patternengine/deca-chrome-extension/issues"
   },
   "homepage": "https://github.com/patternengine/deca-chrome-extension#readme",
+  "browserslist": [
+    "last 4 Chrome versions"
+  ],
   "dependencies": {
+    "@babel/runtime": "^7.14.6",
     "clsx": "^1.1.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "@babel/runtime": "^7.14.6"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -46,7 +49,6 @@
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-webpack-plugin": "^2.5.4",
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "html-webpack-plugin": "^5.3.2",
     "prettier": "^2.3.1",
