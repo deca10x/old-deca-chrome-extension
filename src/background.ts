@@ -1,6 +1,16 @@
-import { color } from './defaultColor';
+import { updateAuthToken } from './auth';
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({ color });
-  console.log('Default background color set to %cgreen', `color: ${color}`);
-});
+type MessageType = {
+  type: 'updateAuthToken';
+  args: [string];
+};
+
+chrome.runtime.onMessageExternal.addListener(
+  async (request: MessageType, sender, sendResponse) => {
+    switch (request.type) {
+      case 'updateAuthToken':
+        updateAuthToken.apply(null, request.args);
+        break;
+    }
+  }
+);

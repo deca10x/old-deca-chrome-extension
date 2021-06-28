@@ -25,7 +25,8 @@
   "options_page": "options.html",
   "externally_connectable": {
     "matches": [
-      "https://deca.xyz/*"
+      "https://deca.xyz/*",
+      "http://localhost:8000/*"
     ]
   },
   "permissions": [
