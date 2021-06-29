@@ -21,30 +21,34 @@ chrome.runtime.onMessageExternal.addListener(
   }
 );
 
-chrome.action.onClicked.addListener((tab: chrome.tabs.Tab) => {
-  if (tab.id) {
+chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
+  if (!tab.id) return;
+
+  const pageInfo = await run(tab.id, getSelection);
+  try {
+    await createAtomFromPage(pageInfo);
+    run(tab.id, () => showNotification('Created a new atom', false));
+  } catch (e) {
+    console.warn(e);
+    run(tab.id, () => showNotification('Failed to create atom', true));
+  }
+});
+
+function run<T>(tabId: number, fn: () => T): Promise<T> {
+  return new Promise((resolve, reject) => {
     chrome.scripting.executeScript(
       {
-        target: { tabId: tab.id },
-        function: getSelection,
+        target: { tabId },
+        function: fn,
       },
-      async (results: chrome.scripting.InjectionResult[]) => {
+      (results: chrome.scripting.InjectionResult[]) => {
         const mainFrame = results.find((r) => r.frameId === 0);
-        if (mainFrame && tab.id) {
-          try {
-            await createAtomFromPage(mainFrame.result);
-            chrome.scripting.executeScript({
-              target: { tabId: tab.id },
-              function: () => showNotification('Created a new atom', false),
-            });
-          } catch (e) {
-            chrome.scripting.executeScript({
-              target: { tabId: tab.id },
-              function: () => showNotification('Failed to create atom', true),
-            });
-          }
+        if (mainFrame) {
+          resolve(mainFrame.result);
+        } else {
+          reject();
         }
       }
     );
-  }
-});
+  });
+}
