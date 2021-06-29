@@ -1,12 +1,21 @@
 .button {
-  height: 30px;
-  width: 30px;
-  outline: none;
-  margin: 10px;
+  align-items: center;
+  background: #fcfcfd;
   border: none;
-  border-radius: 2px;
+  border-radius: 0.2rem;
+  box-shadow: 0 0.1rem 0.3rem #e9e9ec, inset 0 0 0 0.1rem #c8c8d0;
+  color: #717284;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  font-size: 1.3rem;
+  font-weight: 500;
+  height: 2.8rem;
+  line-height: 1.6rem;
+  outline: none;
+  padding: 0.6rem 0.8rem;
 
-  &.current {
-    box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+  &:active {
+    box-shadow: 0 0.1rem 0.3rem #e9e9ec, inset 0 0 0 0.2rem #4b5cf4;
   }
 }
