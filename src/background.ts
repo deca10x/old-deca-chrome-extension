@@ -1,5 +1,9 @@
 import { updateAuthToken } from './auth';
-import { createAtomFromPage, getSelection } from './createAtomFromPage';
+import {
+  createAtomFromPage,
+  getSelection,
+  showNotification,
+} from './createAtomFromPage';
 
 type MessageType = {
   type: 'updateAuthToken';
@@ -28,7 +32,13 @@ chrome.action.onClicked.addListener((tab: chrome.tabs.Tab) => {
         const mainFrame = results.find((r) => r.frameId === 0);
         if (mainFrame) {
           try {
-            createAtomFromPage(mainFrame.result);
+            await createAtomFromPage(mainFrame.result);
+            if (tab.id) {
+              chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                function: showNotification,
+              });
+            }
           } catch (e) {
             console.warn('Failed to make atom:', e);
           }
