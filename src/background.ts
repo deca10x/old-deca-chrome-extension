@@ -30,17 +30,18 @@ chrome.action.onClicked.addListener((tab: chrome.tabs.Tab) => {
       },
       async (results: chrome.scripting.InjectionResult[]) => {
         const mainFrame = results.find((r) => r.frameId === 0);
-        if (mainFrame) {
+        if (mainFrame && tab.id) {
           try {
             await createAtomFromPage(mainFrame.result);
-            if (tab.id) {
-              chrome.scripting.executeScript({
-                target: { tabId: tab.id },
-                function: showNotification,
-              });
-            }
+            chrome.scripting.executeScript({
+              target: { tabId: tab.id },
+              function: () => showNotification('Created a new atom', false),
+            });
           } catch (e) {
-            console.warn('Failed to make atom:', e);
+            chrome.scripting.executeScript({
+              target: { tabId: tab.id },
+              function: () => showNotification('Failed to create atom', true),
+            });
           }
         }
       }
