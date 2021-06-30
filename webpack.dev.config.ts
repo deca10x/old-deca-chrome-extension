@@ -18,8 +18,8 @@ const config = merge<Configuration>(commonConfig, {
     historyApiFallback: true,
     port: 4000,
     hot: true,
-    open: true,
-    openPage: ['popup.html', 'options.html'],
+    // open: true,
+    // openPage: ['popup.html', 'options.html'],
   },
 });
 
