@@ -7,7 +7,8 @@ type PageInfo = {
 };
 
 export function createAtomFromPage(info: PageInfo): Promise<void> {
-  const body = info.selection.length > 0 ? info.selection : info.url;
+  const body =
+    info.selection.length > 0 ? info.selection : shortenUrl(info.url);
   const content = [
     { type: 'paragraph', children: [{ text: info.title }] },
     {
@@ -34,6 +35,7 @@ export function showNotification(text: string, isError: boolean): void {
 
   const banner = document.createElement('div');
   banner.style.position = 'fixed';
+  banner.style.zIndex = '2147483647';
   banner.style.top = '0';
   banner.style.left = '0';
   banner.style.width = '100vw';
@@ -57,4 +59,25 @@ export function showNotification(text: string, isError: boolean): void {
   setTimeout(() => {
     banner.remove();
   }, timeout);
+}
+
+function shortenUrl(url: string): string {
+  const THRESHOLD = 35;
+  const { host, pathname } = new URL(url);
+
+  // include path sections as long as total length is under THRESHOLD
+  const shorted = pathname
+    .split('/')
+    .filter((p) => p.length)
+    .reduce((path, part) => {
+      if (host.length + path.length + part.length < THRESHOLD) {
+        return `${path}/${part}`;
+      }
+      if (path[path.length - 1] !== '…') {
+        return `${path}/…`;
+      }
+      return path;
+    }, '');
+
+  return `${host}${shorted}`;
 }
