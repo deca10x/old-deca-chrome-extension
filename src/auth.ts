@@ -12,6 +12,12 @@ export function getAuthToken(): Promise<string> {
   });
 }
 
+export function removeAuthToken(): Promise<void> {
+  return new Promise<void>((resolve) => {
+    chrome.storage.local.remove('authToken', resolve);
+  });
+}
+
 export function useAuthToken(): string {
   const [token, setToken] = useState('');
 

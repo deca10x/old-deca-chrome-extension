@@ -7,7 +7,7 @@ export const commonConfig: webpack.Configuration = {
   entry: {
     // popup: './src/popup.tsx',
     background: './src/background.ts',
-    // options: './src/options.tsx',
+    options: './src/options.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -39,11 +39,11 @@ export const commonConfig: webpack.Configuration = {
     //   filename: 'popup.html',
     //   chunks: ['popup'],
     // }),
-    // new HtmlWebpackPlugin({
-    //   template: 'src/options.html',
-    //   filename: 'options.html',
-    //   chunks: ['options'],
-    // }),
+    new HtmlWebpackPlugin({
+      template: 'src/options.html',
+      filename: 'options.html',
+      chunks: ['options'],
+    }),
     new ForkTsCheckerWebpackPlugin({
       async: false,
       eslint: {

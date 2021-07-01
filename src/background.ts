@@ -1,4 +1,4 @@
-import { updateAuthToken } from './auth';
+import { updateAuthToken, removeAuthToken } from './auth';
 import {
   createAtomFromPage,
   getSelection,
@@ -22,6 +22,12 @@ chrome.runtime.onMessageExternal.addListener(
   }
 );
 
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.tabs.create({
+    url: 'https://deca.xyz/signin?chromeExtensionWelcome=true',
+  });
+});
+
 chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
   if (!tab.id) return;
 
@@ -30,23 +36,25 @@ chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
     await createAtomFromPage(pageInfo);
     await run(tab.id, showNotification);
   } catch (e) {
-    console.warn(e);
+    if (e?.message === '403') {
+      await removeAuthToken();
+    }
     await run(tab.id, showError);
+    chrome.tabs.create({
+      url: 'http://localhost:8000/signin?chromeExtensionWelcome=true',
+      active: false,
+    });
   }
 });
 
-function run<T>(tabId: number, fn: () => T): Promise<T> {
-  return chrome.scripting
-    .executeScript({
-      target: { tabId },
-      function: fn,
-    })
-    .then((results: chrome.scripting.InjectionResult[]) => {
-      const mainFrame = results.find((r) => r.frameId === 0);
-      if (mainFrame) {
-        return mainFrame.result;
-      } else {
-        throw new Error('no response');
-      }
-    });
+async function run<T>(tabId: number, fn: () => T): Promise<T> {
+  const results = await chrome.scripting.executeScript({
+    target: { tabId },
+    function: fn,
+  });
+  const mainFrame = results.find((r) => r.frameId === 0);
+  if (!mainFrame) {
+    throw new Error('no response');
+  }
+  return mainFrame.result;
 }

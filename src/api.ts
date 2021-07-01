@@ -16,7 +16,7 @@ async function fetchJson(method: Method, url: string, body: BodyInit) {
     body,
   });
   if (!resp.ok) {
-    throw new Error(resp.statusText);
+    throw new Error(String(resp.status));
   }
   return resp.json();
 }
