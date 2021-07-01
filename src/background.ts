@@ -3,6 +3,7 @@ import {
   createAtomFromPage,
   getSelection,
   showNotification,
+  showError,
 } from './createAtomFromPage';
 
 type MessageType = {
@@ -27,28 +28,25 @@ chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
   const pageInfo = await run(tab.id, getSelection);
   try {
     await createAtomFromPage(pageInfo);
-    run(tab.id, () => showNotification('Created a new atom', false));
+    await run(tab.id, showNotification);
   } catch (e) {
     console.warn(e);
-    run(tab.id, () => showNotification('Failed to create atom', true));
+    await run(tab.id, showError);
   }
 });
 
 function run<T>(tabId: number, fn: () => T): Promise<T> {
-  return new Promise((resolve, reject) => {
-    chrome.scripting.executeScript(
-      {
-        target: { tabId },
-        function: fn,
-      },
-      (results: chrome.scripting.InjectionResult[]) => {
-        const mainFrame = results.find((r) => r.frameId === 0);
-        if (mainFrame) {
-          resolve(mainFrame.result);
-        } else {
-          reject();
-        }
+  return chrome.scripting
+    .executeScript({
+      target: { tabId },
+      function: fn,
+    })
+    .then((results: chrome.scripting.InjectionResult[]) => {
+      const mainFrame = results.find((r) => r.frameId === 0);
+      if (mainFrame) {
+        return mainFrame.result;
+      } else {
+        throw new Error('no response');
       }
-    );
-  });
+    });
 }
