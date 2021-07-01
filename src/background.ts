@@ -37,6 +37,7 @@ chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
     await createAtomFromPage(pageInfo);
     await run(tab.id, showNotification);
   } catch (e) {
+    console.error(e);
     await removeAuthToken();
     chrome.tabs.create({ url: SIGN_URL });
     await run(tab.id, showError);
