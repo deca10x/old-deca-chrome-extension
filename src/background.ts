@@ -1,4 +1,5 @@
 import { updateAuthToken, removeAuthToken } from './auth';
+import { SIGN_URL } from './constants';
 import {
   createAtomFromPage,
   getSelection,
@@ -41,7 +42,7 @@ chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
     }
     await run(tab.id, showError);
     chrome.tabs.create({
-      url: 'http://localhost:8000/signin?chromeExtensionWelcome=true',
+      url: SIGN_URL,
       active: false,
     });
   }

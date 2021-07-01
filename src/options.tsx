@@ -1,5 +1,6 @@
 import { FC, StrictMode } from 'react';
 import ReactDOM from 'react-dom';
+import { SIGN_URL } from './constants';
 
 import './global.scss';
 import styles from './options.module.scss';
@@ -12,11 +13,7 @@ const App: FC = () => {
         <h1 className={styles.title}>Deca Extension</h1>
         <p>
           Welcome! Before you start, you&apos;ll need to{' '}
-          <a
-            href="http://localhost:8000/signin?chromeExtensionWelcome=true"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={SIGN_URL} target="_blank" rel="noreferrer">
             sign in
           </a>
           .
