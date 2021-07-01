@@ -7,19 +7,27 @@ type PageInfo = {
 };
 
 export function createAtomFromPage(info: PageInfo): Promise<void> {
-  const body =
-    info.selection.length > 0 ? info.selection : shortenUrl(info.url);
   const content = [
     { type: 'paragraph', children: [{ text: info.title }] },
     {
       type: 'paragraph',
       children: [
         { text: '' },
-        { type: 'link', url: info.url, children: [{ text: body }] },
+        {
+          type: 'link',
+          url: info.url,
+          children: [{ text: shortenUrl(info.url) }],
+        },
         { text: '' },
       ],
     },
   ];
+  if (info.selection.length > 0) {
+    content.push(
+      { type: 'paragraph', children: [{ text: '' }] },
+      { type: 'paragraph', children: [{ text: info.selection }] }
+    );
+  }
   return createAtom(JSON.stringify({ content }));
 }
 

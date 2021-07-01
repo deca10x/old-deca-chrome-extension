@@ -24,7 +24,7 @@ chrome.runtime.onMessageExternal.addListener(
 
 chrome.runtime.onInstalled.addListener(() => {
   chrome.tabs.create({
-    url: 'https://deca.xyz/signin?chromeExtensionWelcome=true',
+    url: '/options.html',
   });
 });
 
