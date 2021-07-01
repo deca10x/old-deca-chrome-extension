@@ -73,8 +73,8 @@ export function showNotification(): void {
 }
 
 export function showError(): void {
-  const text = 'Failed to create atom. Sign in to Deca';
-  const timeout = 3000;
+  const text = 'Failed to create atom. Try again?';
+  const timeout = 5000;
 
   const banner = document.createElement('div');
   banner.style.position = 'fixed';

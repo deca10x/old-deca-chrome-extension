@@ -37,14 +37,9 @@ chrome.action.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
     await createAtomFromPage(pageInfo);
     await run(tab.id, showNotification);
   } catch (e) {
-    if (e?.message === '403') {
-      await removeAuthToken();
-    }
+    await removeAuthToken();
+    chrome.tabs.create({ url: SIGN_URL });
     await run(tab.id, showError);
-    chrome.tabs.create({
-      url: SIGN_URL,
-      active: false,
-    });
   }
 });
 
