@@ -3,7 +3,7 @@ import { getAuthToken } from './auth';
 
 type Method = 'GET' | 'POST';
 
-const BASE_URL = 'https://deca.systems/dev-v1-core';
+const BASE_URL = 'https://deca.systems/prod-v1-core';
 
 async function fetchJson(method: Method, url: string, body: BodyInit) {
   const authToken = await getAuthToken();
