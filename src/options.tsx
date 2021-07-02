@@ -1,13 +1,41 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { StrictMode } from 'react';
+import { FC, StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import styles from './button.module.scss';
+import { SIGN_URL } from './constants';
 
-const App = () => (
-  <div>
-    <p>Choose a different background color!</p>
-  </div>
-);
+import './global.scss';
+import styles from './options.module.scss';
+
+const App: FC = () => {
+  const isMac = /mac/i.test(navigator.platform);
+  return (
+    <div className={styles.container}>
+      <main className={styles.content}>
+        <h1 className={styles.title}>Deca Extension</h1>
+        <p>
+          Welcome! Before you start, you&apos;ll need to{' '}
+          <a href={SIGN_URL} target="_blank" rel="noreferrer">
+            sign in
+          </a>
+          .
+        </p>
+        <h2>How to use</h2>
+        <p>
+          Click the Deca extension button (looks like{' '}
+          <img src="/images/icon-16.png" width="16px" height="16px" />) to save
+          the the current page as an atom. If you have text selected, that text
+          will be saved in the atom as well.
+        </p>
+        <p>
+          <strong>
+            You can also use the keyboard shortcut{' '}
+            <code>{isMac ? 'Cmd' : 'Ctrl'}+Shift+Y</code> instead of clicking
+            the button.
+          </strong>
+        </p>
+      </main>
+    </div>
+  );
+};
 
 ReactDOM.render(
   <StrictMode>
@@ -15,52 +43,3 @@ ReactDOM.render(
   </StrictMode>,
   document.getElementById('root')
 );
-
-const page = document.getElementById('buttonDiv');
-const presetButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1'];
-
-// Reacts to a button click by marking the selected button and saving
-// the selection
-function handleButtonClick(event: MouseEvent) {
-  // Remove styling from the previously selected color
-  const current = (event.target as any).parentElement.querySelector(
-    `.${styles.current}`
-  );
-  if (current && current !== event.target) {
-    current.classList.remove(styles.current);
-  }
-
-  // Mark the button as selected
-  const color = (event.target as any).dataset.color;
-  (event.target as any).classList.add(styles.current);
-  chrome.storage.sync.set({ color });
-}
-
-// Add a button to the page for each supplied color
-function constructOptions(buttonColors: string[]) {
-  chrome.storage.sync.get('color', (data) => {
-    const currentColor = data.color;
-    // For each color we were provided…
-    for (const buttonColor of buttonColors) {
-      // …create a button with that color…
-      const button = document.createElement('button');
-      button.dataset.color = buttonColor;
-      button.classList.add(styles.button);
-      button.style.backgroundColor = buttonColor;
-
-      // …mark the currently selected color…
-      if (buttonColor === currentColor) {
-        button.classList.add(styles.current);
-      }
-
-      // …and register a listener for when that button is clicked
-      button.addEventListener('click', handleButtonClick);
-      if (page) {
-        page.appendChild(button);
-      }
-    }
-  });
-}
-
-// Initialize the page by constructing the color options
-constructOptions(presetButtonColors);

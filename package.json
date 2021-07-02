@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/patternengine/deca-chrome-extension.git"
+    "url": "git+https://github.com/deca10x/deca-chrome-extension.git"
   },
   "license": "MIT",
   "bugs": {
@@ -24,7 +24,8 @@
     "@babel/runtime": "^7.14.6",
     "clsx": "^1.1.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -35,29 +36,30 @@
     "@types/chrome": "^0.0.145",
     "@types/copy-webpack-plugin": "^8.0.0",
     "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
-    "@types/node": "^15.12.4",
+    "@types/node": "^15.12.5",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
+    "@types/uuid": "^8.3.0",
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.4",
-    "@typescript-eslint/eslint-plugin": "^4.28.0",
-    "@typescript-eslint/parser": "^4.28.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
-    "copy-webpack-plugin": "^9.0.0",
+    "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
     "eslint": "^7.29.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "html-webpack-plugin": "^5.3.2",
-    "prettier": "^2.3.1",
+    "prettier": "^2.3.2",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
-    "style-loader": "^2.0.0",
+    "style-loader": "^3.0.0",
     "ts-node": "^10.0.0",
-    "typescript": "^4.3.4",
-    "webpack": "^5.40.0",
+    "typescript": "^4.3.5",
+    "webpack": "^5.41.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.8.0"
